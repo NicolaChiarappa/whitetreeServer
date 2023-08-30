@@ -1,8 +1,8 @@
 const axios = require("axios").default;
-const { authapp, firestore } = require("./config");
+// const { authapp, firestore } = require("./config");
 require("dotenv").config();
-const { getAuth } = require("firebase-admin/auth");
-const { getFirestore } = require("firebase-admin/firestore");
+// const { getAuth } = require("firebase-admin/auth");
+// const { getFirestore } = require("firebase-admin/firestore");
 const bodyparser = require("body-parser");
 const https = require("https");
 const fs = require("fs");
