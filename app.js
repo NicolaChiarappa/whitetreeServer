@@ -32,7 +32,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log(req.body[0]["price_data"]);
   try {
     const session = await stripe.checkout.sessions.create({
       success_url: "https://www.underthewhitetree.it/store",
@@ -42,7 +41,7 @@ app.post("/", async (req, res) => {
     res.send(session.url);
   } catch {
     (e) => {
-      res.send("non va");
+      res.send("qualcosa non va");
     };
   }
 });
