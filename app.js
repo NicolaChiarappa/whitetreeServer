@@ -28,7 +28,11 @@ https
     console.log("listen at port ", port);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://www.underthewhitetree.it",
+  })
+);
 app.use(bodyparser.json());
 app.use(
   bodyparser.urlencoded({
