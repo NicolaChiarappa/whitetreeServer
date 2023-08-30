@@ -12,21 +12,13 @@ const cors = require("cors");
 
 const app = express();
 
-const port = 4000;
+const port = 80;
 
 const stripe = require("stripe")(process.env.STRIPEKEY);
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync("key.pem"),
-      cert: fs.readFileSync("cert.pem"),
-    },
-    app
-  )
-  .listen(port, () => {
-    console.log("listen at port ", port);
-  });
+app.listen(port, () => {
+  console.log("listen at port ", port);
+});
 
 app.use(
   cors({
