@@ -28,11 +28,7 @@ https
     console.log("listen at port ", port);
   });
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 app.use(bodyparser.json());
 app.use(
   bodyparser.urlencoded({
