@@ -16,13 +16,9 @@ const port = 80;
 
 const stripe = require("stripe")(process.env.STRIPEKEY);
 
-app.listen(port, () => {
-  console.log("listen at port ", port);
-});
-
 app.use(
   cors({
-    origin: "https://www.underthewhitetree.it",
+    origin: "https://www.underthewhitetree.it/*",
   })
 );
 app.use(bodyparser.json());
@@ -50,4 +46,8 @@ app.post("/", async (req, res) => {
       res.send("non va");
     };
   }
+});
+
+app.listen(port, () => {
+  console.log("listen at port ", port);
 });
