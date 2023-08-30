@@ -4,8 +4,6 @@ const axios = require("axios").default;
 // const { getAuth } = require("firebase-admin/auth");
 // const { getFirestore } = require("firebase-admin/firestore");
 const bodyparser = require("body-parser");
-const https = require("https");
-const fs = require("fs");
 
 const express = require("express");
 const cors = require("cors");
@@ -16,11 +14,7 @@ const port = 3000;
 
 const stripe = require("stripe")(process.env.STRIPEKEY);
 
-app.use(
-  cors({
-    origin: "https://www.underthewhitetree.it/",
-  })
-);
+app.use(cors());
 app.use(bodyparser.json());
 app.use(
   bodyparser.urlencoded({
