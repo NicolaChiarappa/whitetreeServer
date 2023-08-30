@@ -16,11 +16,7 @@ const port = 80;
 
 const stripe = require("stripe")(process.env.STRIPEKEY);
 
-app.use(
-  cors({
-    origin: "https://www.underthewhitetree.it/*",
-  })
-);
+app.use(cors());
 app.use(bodyparser.json());
 app.use(
   bodyparser.urlencoded({
