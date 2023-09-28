@@ -32,7 +32,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/success", (req, res) => {
-  res.send(req.headers);
+  if (req.headers.referer == "https://checkout.stripe.com/") {
+    res.redirect("https://www.underthewhitetree.it/success");
+  } else {
+    res.redirect("https://www.underthewhitetree.it/");
+  }
 });
 
 app.post("/", async (req, res) => {
