@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      success_url: "https://www.underthewhitetree.it/store",
+      success_url: "https://www.underthewhitetree.it/success",
       line_items: req.body,
       mode: "payment",
     });
