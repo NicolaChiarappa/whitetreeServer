@@ -31,10 +31,14 @@ app.get("/", (req, res) => {
   res.send(req.headers);
 });
 
+app.get("/success", (req, res) => {
+  res.send(req.body);
+});
+
 app.post("/", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      success_url: "https://www.underthewhitetree.it/success",
+      success_url: "https://nice-pear-dalmatian-garb.cyclic.app/success",
       line_items: req.body,
       mode: "payment",
     });
