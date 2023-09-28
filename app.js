@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 app.get("/success", (req, res) => {
   if (req.headers.referer == "https://checkout.stripe.com/") {
-    axios.get("https://www.underthewhitetree.it/success");
+    res.redirect("https://www.underthewhitetree.it/success");
   } else {
     res.redirect("https://www.underthewhitetree.it/");
   }
