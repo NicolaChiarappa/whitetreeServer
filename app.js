@@ -40,7 +40,7 @@ app.get("/success", (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      success_url: "https://nice-pear-dalmatian-garb.cyclic.app/success",
+      success_url: "https://worried-lime-eel.cyclic.cloud/success",
       line_items: req.body,
       mode: "payment",
     });
