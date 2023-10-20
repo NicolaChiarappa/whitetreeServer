@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-// const { authapp, firestore } = require("./config");
+const { authapp, firestore } = require("./config");
 
 // const { getAuth } = require("firebase-admin/auth");
 // const { getFirestore } = require("firebase-admin/firestore");
@@ -27,8 +27,16 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send(req.headers);
+app.get("/", async (req, res) => {
+  // const users = firestore.collection("users");
+  // const snapshot = await users.get(users);
+  // snapshot.forEach((user) => console.log(user.id));
+  console.log(req.headers);
+  authapp.listUsers(1000).then((res) => {
+    res.users.forEach((e) => {
+      authapp.deleteUser(e.uid);
+    });
+  });
 });
 
 app.get("/success", (req, res) => {
@@ -38,17 +46,38 @@ app.get("/success", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.create({
-      success_url: "https://worried-lime-eel.cyclic.cloud/success",
-      line_items: req.body,
-      mode: "payment",
-    });
-    res.send(session.url);
-  } catch {
-    (e) => {
-      res.send("qualcosa non va");
-    };
+  if (req.body["coupon"] != "") {
+    try {
+      const session = await stripe.checkout.sessions.create({
+        success_url: "https://worried-lime-eel.cyclic.cloud/success",
+        line_items: req.body["cart"],
+        discounts: [
+          {
+            coupon: "marty27",
+          },
+        ],
+        mode: "payment",
+      });
+      res.send(session.url);
+    } catch {
+      (e) => {
+        res.send("qualcosa non va");
+      };
+    }
+  } else {
+    try {
+      const session = await stripe.checkout.sessions.create({
+        success_url: "https://worried-lime-eel.cyclic.cloud/success",
+        line_items: req.body["cart"],
+
+        mode: "payment",
+      });
+      res.send(session.url);
+    } catch {
+      (e) => {
+        res.send("qualcosa non va");
+      };
+    }
   }
 });
 
